@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0d3b66" />
+  <meta name="description" content="Guia simples e visual para entender como funciona ADS na SPTech: estudo, estágio, valores, rotina e empresas parceiras." />
+  <title>ADS na SPTech — explicado sem enrolação</title>
+  <style>
+    :root{
+      --bg:#f4f7fb; --card:#ffffff; --text:#172033; --muted:#5c677d;
+      --brand:#0d3b66; --brand2:#1f7a8c; --accent:#ffb703; --ok:#0f8b6d;
+      --soft:#eaf1f8; --line:#dce4ee; --warn:#fff4d6; --danger:#fff0ef;
+      --shadow:0 16px 40px rgba(13,59,102,.10); --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+    a{color:inherit}
+    button{font:inherit}
+    .wrap{width:min(1120px,calc(100% - 32px));margin:auto}
+    .topbar{position:sticky;top:0;z-index:30;background:rgba(244,247,251,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(220,228,238,.9)}
+    .topbar .wrap{height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:850;letter-spacing:-.02em}
+    .logo{width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;color:white;font-weight:900}
+    .nav{display:flex;gap:8px;overflow:auto}
+    .nav a{text-decoration:none;padding:9px 12px;border-radius:999px;color:var(--muted);white-space:nowrap;font-size:.9rem}
+    .nav a:hover{background:white;color:var(--brand)}
+    .hero{padding:64px 0 28px}
+    .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:stretch}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;background:#e4f4f1;color:#0f6b59;border-radius:999px;padding:7px 11px;font-size:.82rem;font-weight:800}
+    h1{font-size:clamp(2.2rem,7vw,4.7rem);line-height:.96;letter-spacing:-.055em;margin:18px 0 18px;max-width:850px}
+    .hero p{font-size:clamp(1.03rem,2vw,1.25rem);color:var(--muted);max-width:720px}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+    .btn{border:none;border-radius:14px;padding:12px 16px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+    .btn-primary{background:var(--brand);color:white}
+    .btn-ghost{background:white;border:1px solid var(--line);color:var(--brand)}
+    .hero-card{background:linear-gradient(160deg,#103e68,#0d3b66 55%,#155a72);color:white;border-radius:28px;padding:26px;box-shadow:var(--shadow);display:grid;gap:18px}
+    .hero-card h2{margin:0;font-size:1.1rem;color:#dceeff}
+    .big-number{font-size:3.2rem;font-weight:900;letter-spacing:-.05em;line-height:1}
+    .hero-mini-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+    .hero-mini{background:rgba(255,255,255,.1);padding:14px;border-radius:16px}
+    .hero-mini b{display:block;font-size:1.15rem}
+    .hero-mini span{font-size:.82rem;color:#d7e8f5}
+    .section{padding:32px 0}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:18px}
+    .section h2{font-size:clamp(1.6rem,4vw,2.45rem);letter-spacing:-.035em;margin:0}
+    .section-head p{margin:0;color:var(--muted);max-width:620px}
+    .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:0 6px 20px rgba(24,40,61,.04)}
+    .card .kicker{font-size:.75rem;font-weight:850;text-transform:uppercase;letter-spacing:.08em;color:var(--brand2)}
+    .card strong{display:block;font-size:1.42rem;letter-spacing:-.03em;margin:6px 0}
+    .card p{margin:0;color:var(--muted);font-size:.92rem}
+    .timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+    .semester{position:relative;background:white;border:1px solid var(--line);border-radius:20px;padding:18px;min-height:250px;transition:.2s}
+    .semester:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+    .semester.active{border:2px solid var(--brand2);box-shadow:0 12px 30px rgba(31,122,140,.15)}
+    .semester .num{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--soft);font-weight:900;color:var(--brand)}
+    .semester h3{margin:14px 0 8px}
+    .semester ul{padding-left:18px;margin:0;color:var(--muted);font-size:.9rem}
+    .semester li+li{margin-top:7px}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .calculator{background:white;border:1px solid var(--line);border-radius:26px;padding:24px;box-shadow:var(--shadow)}
+    .segmented{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;background:var(--soft);padding:6px;border-radius:14px;margin:18px 0}
+    .segmented button{border:none;background:transparent;padding:10px 4px;border-radius:10px;font-weight:800;color:var(--muted);cursor:pointer}
+    .segmented button.active{background:white;color:var(--brand);box-shadow:0 4px 12px rgba(13,59,102,.1)}
+    .money-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    .money{border-radius:18px;padding:16px}
+    .money.cost{background:var(--danger)}
+    .money.income{background:#e9f8f3}
+    .money span{display:block;font-size:.82rem;color:var(--muted)}
+    .money strong{display:block;font-size:1.6rem;margin-top:2px}
+    .balance{margin-top:12px;border-radius:18px;background:var(--brand);color:white;padding:16px}
+    .balance span{opacity:.78;font-size:.82rem}
+    .balance strong{display:block;font-size:1.8rem}
+    .note{margin-top:12px;color:var(--muted);font-size:.82rem}
+    .flow{display:grid;gap:10px}
+    .flow-step{display:flex;gap:14px;align-items:flex-start;background:white;border:1px solid var(--line);border-radius:18px;padding:16px}
+    .flow-step .dot{flex:0 0 34px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--brand);color:white;font-weight:900}
+    .flow-step b{display:block;margin-bottom:3px}
+    .flow-step span{color:var(--muted);font-size:.9rem}
+    .attention{background:var(--warn);border:1px solid #f1d48a;border-radius:22px;padding:20px}
+    .attention h3{margin:0 0 8px}
+    .attention ul{margin:0;padding-left:20px}
+    .partners{display:flex;flex-wrap:wrap;gap:8px}
+    .chip{background:white;border:1px solid var(--line);border-radius:999px;padding:9px 12px;font-weight:750;font-size:.88rem}
+    .faq{display:grid;gap:10px}
+    details{background:white;border:1px solid var(--line);border-radius:18px;padding:0 18px}
+    summary{cursor:pointer;list-style:none;padding:17px 0;font-weight:800}
+    summary::-webkit-details-marker{display:none}
+    details p{color:var(--muted);margin:0 0 18px}
+    .source-box{font-size:.88rem;background:#eef3f8;border:1px solid var(--line);border-radius:18px;padding:16px;color:var(--muted)}
+    .source-box a{color:var(--brand);font-weight:700}
+    footer{padding:34px 0 48px;color:var(--muted);font-size:.85rem}
+    .mobile-only{display:none}
+    @media (max-width:900px){
+      .hero-grid,.split{grid-template-columns:1fr}
+      .cards{grid-template-columns:repeat(2,1fr)}
+      .timeline{grid-template-columns:1fr}
+      .semester{min-height:0}
+      .nav{display:none}
+      .mobile-only{display:inline-flex}
+      h1{font-size:clamp(2.55rem,13vw,4.4rem)}
+    }
+    @media (max-width:560px){
+      .wrap{width:min(100% - 22px,1120px)}
+      .hero{padding-top:34px}
+      .cards{grid-template-columns:1fr 1fr}
+      .card{padding:16px}
+      .card strong{font-size:1.2rem}
+      .hero-mini-grid,.money-grid{grid-template-columns:1fr 1fr}
+      .section{padding:25px 0}
+      .segmented button{font-size:.82rem}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <div class="brand"><span class="logo">SP</span><span>ADS na SPTech</span></div>
+      <nav class="nav" aria-label="Navegação">
+        <a href="#resumo">Resumo</a><a href="#jornada">Jornada</a><a href="#dinheiro">Valores</a><a href="#estagio">Estágio</a><a href="#faq">Dúvidas</a>
+      </nav>
+      <a class="btn btn-ghost mobile-only" href="#resumo">Ver resumo</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Guia simples para aluno + família</span>
+          <h1>SPTech sem enrolação.</h1>
+          <p>Como funciona o curso de <b>Análise e Desenvolvimento de Sistemas</b>, quando começa o estágio, quanto custa, quanto costuma pagar e o que realmente é garantido.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#jornada">Ver os 5 semestres ↓</a>
+            <a class="btn btn-ghost" href="#dinheiro">Simular valores</a>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="Resumo rápido">
+          <h2>Em uma frase</h2>
+          <div class="big-number">2,5 anos</div>
+          <div>Você começa estudando em período integral parcial, entra em estágio já no 2º semestre e termina com experiência profissional acumulada.</div>
+          <div class="hero-mini-grid">
+            <div class="hero-mini"><b>1º semestre</b><span>mensalidade zero</span></div>
+            <div class="hero-mini"><b>2º semestre</b><span>começa o estágio</span></div>
+            <div class="hero-mini"><b>18 meses</b><span>estágio integrado</span></div>
+            <div class="hero-mini"><b>Presencial</b><span>Haddock Lobo, SP</span></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="resumo">
+      <div class="wrap">
+        <div class="section-head">
+          <div><h2>As 4 respostas que importam primeiro</h2></div>
+          <p>Se seus pais perguntarem “tá, mas como isso funciona na prática?”, começa por aqui.</p>
+        </div>
+        <div class="cards">
+          <article class="card"><span class="kicker">Curso</span><strong>5 semestres</strong><p>ADS presencial, cerca de 2 anos e meio.</p></article>
+          <article class="card"><span class="kicker">1º semestre</span><strong>R$ 0</strong><p>Bolsa de 100% no primeiro ciclo.</p></article>
+          <article class="card"><span class="kicker">Depois</span><strong>R$ 1.808/mês*</strong><p>Valor publicado para 2027/1, sujeito a reajuste.</p></article>
+          <article class="card"><span class="kicker">Estágio</span><strong>R$ 1.800–2.500*</strong><p>Faixas médias publicadas, variando por fase e empresa.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="jornada">
+      <div class="wrap">
+        <div class="section-head">
+          <div><h2>A jornada, semestre por semestre</h2></div>
+          <p>A ideia é liberar cada vez mais espaço no dia para o trabalho conforme você avança.</p>
+        </div>
+        <div class="timeline">
+          <article class="semester active"><div class="num">1</div><h3>Base forte</h3><ul><li>Aulas: <b>10h–16h</b></li><li>Sem estágio</li><li>Mensalidade: <b>R$ 0</b></li><li>Fundamentos de programação, banco de dados e computação</li></ul></article>
+          <article class="semester"><div class="num">2</div><h3>Começa o estágio</h3><ul><li>Aulas: <b>16h30–20h30</b></li><li>Estágio normalmente de manhã</li><li>Mensalidade publicada: <b>R$ 1.808</b></li><li>Bolsa média: <b>R$ 1.800–2.200</b></li></ul></article>
+          <article class="semester"><div class="num">3</div><h3>Experiência + evolução</h3><ul><li>Aulas: <b>16h30–20h30</b></li><li>Estágio continua</li><li>Front-end, back-end, engenharia de software</li><li>Mais autonomia profissional</li></ul></article>
+          <article class="semester"><div class="num">4</div><h3>Rotina mais profissional</h3><ul><li>Aulas: <b>18h–22h</b></li><li>Mais espaço para jornada comercial</li><li>Bolsa média: <b>R$ 2.000–2.500</b></li><li>Efetivação pode começar a aparecer</li></ul></article>
+          <article class="semester"><div class="num">5</div><h3>Reta final</h3><ul><li>Aulas: <b>18h–22h</b></li><li>Estágio ou possível efetivação</li><li>IA aplicada, dados e aplicações</li><li>Formatura com experiência real acumulada</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="dinheiro">
+      <div class="wrap split">
+        <div class="calculator">
+          <span class="eyebrow">Simulador simples</span>
+          <h2 style="margin-top:12px">Quanto entra e quanto sai?</h2>
+          <p style="color:var(--muted)">Escolha um semestre. Usamos o ponto médio da faixa de bolsa divulgada só para dar uma noção.</p>
+          <div class="segmented" role="tablist" aria-label="Semestre">
+            <button data-sem="1" class="active">1º</button><button data-sem="2">2º</button><button data-sem="3">3º</button><button data-sem="4">4º</button><button data-sem="5">5º</button>
+          </div>
+          <div class="money-grid">
+            <div class="money cost"><span>Mensalidade</span><strong id="tuition">R$ 0</strong></div>
+            <div class="money income"><span>Bolsa-estágio estimada</span><strong id="stipend">R$ 0</strong></div>
+          </div>
+          <div class="balance"><span>Diferença ilustrativa no mês</span><strong id="balance">R$ 0</strong></div>
+          <p class="note" id="calcNote">No 1º semestre não há estágio e a mensalidade é zero.</p>
+        </div>
+
+        <div>
+          <div class="attention">
+            <h3>Importante para não criar expectativa errada</h3>
+            <ul>
+              <li>A bolsa de estágio é uma <b>faixa média</b>, não salário garantido.</li>
+              <li>A mensalidade de R$ 1.808 é a referência publicada para <b>2027/1</b> e pode sofrer reajustes.</li>
+              <li>A empresa paga a bolsa ao aluno; o aluno paga a faculdade.</li>
+            </ul>
+          </div>
+          <div class="flow" style="margin-top:12px">
+            <div class="flow-step"><div class="dot">1</div><div><b>Você estuda sem pagar no 1º ciclo</b><span>É a fase de base técnica e preparação.</span></div></div>
+            <div class="flow-step"><div class="dot">2</div><div><b>No 2º semestre entra a parceira</b><span>Começa o estágio integrado ao curso.</span></div></div>
+            <div class="flow-step"><div class="dot">3</div><div><b>A bolsa ajuda a bancar a mensalidade</b><span>O modelo foi desenhado para uma coisa financiar boa parte da outra.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="estagio">
+      <div class="wrap split">
+        <div>
+          <div class="section-head" style="display:block"><h2>O que “estágio garantido” quer dizer?</h2><p style="margin-top:8px">É aqui que a SPTech foge bastante do modelo de faculdade tradicional.</p></div>
+          <div class="flow">
+            <div class="flow-step"><div class="dot">✓</div><div><b>Passou pelo 1º ciclo</b><span>O programa prevê vagas para os alunos que avançam para o segundo período.</span></div></div>
+            <div class="flow-step"><div class="dot">✓</div><div><b>A faculdade faz a ponte</b><span>A empresa não é um estágio aleatório encontrado por você por fora.</span></div></div>
+            <div class="flow-step"><div class="dot">✓</div><div><b>18 meses integrados</b><span>O estágio faz parte da jornada do curso.</span></div></div>
+            <div class="flow-step"><div class="dot">!</div><div><b>Efetivação não é promessa</b><span>Pode acontecer, especialmente no fim, mas depende da empresa e do desempenho.</span></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="attention">
+            <h3>Menos liberdade do que num estágio comum</h3>
+            <p style="margin:0">O estágio faz parte do programa. A empresa é indicada dentro do processo da SPTech e abandonar a colocação antes do período previsto pode afetar a bolsa vinculada ao programa.</p>
+          </div>
+          <div class="card" style="margin-top:12px">
+            <span class="kicker">Local da faculdade</span>
+            <strong>Rua Haddock Lobo, 595</strong>
+            <p>Cerqueira César, perto da Paulista e da estação Consolação. <b>O estágio pode ser em outro endereço</b>, dependendo da empresa parceira.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-head"><div><h2>Exemplos de empresas parceiras</h2></div><p>Há bancos, consultorias, empresas de tecnologia, telecom e grandes grupos corporativos.</p></div>
+        <div class="partners" aria-label="Empresas parceiras">
+          <span class="chip">Itaú</span><span class="chip">Bradesco</span><span class="chip">C6 Bank</span><span class="chip">Avanade</span><span class="chip">Accenture</span><span class="chip">CI&T</span><span class="chip">Deloitte</span><span class="chip">PwC</span><span class="chip">Vivo</span><span class="chip">Claro</span><span class="chip">Stefanini</span><span class="chip">Tivit</span><span class="chip">HP</span><span class="chip">Safra</span><span class="chip">Atos</span>
+        </div>
+        <p class="note">Lista apenas ilustrativa com nomes divulgados pela instituição; as empresas disponíveis para uma turma podem variar.</p>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="wrap split">
+        <div>
+          <div class="section-head" style="display:block"><h2>Perguntas de pai e mãe</h2><p style="margin-top:8px">Clique para abrir.</p></div>
+          <div class="faq">
+            <details><summary>“Ele vai pagar a faculdade desde o começo?”</summary><p>Não. O primeiro semestre tem bolsa de 100%. A mensalidade começa depois, junto com a fase de estágio.</p></details>
+            <details><summary>“O estágio é mesmo obrigatório?”</summary><p>Sim, ele é parte central do modelo regular da SPTech. Não é tratado apenas como uma vaga opcional do setor de carreiras.</p></details>
+            <details><summary>“A SPTech garante emprego depois?”</summary><p>Não. A estrutura garante a etapa de estágio dentro das condições do programa; efetivação depende da empresa, da vaga e do desempenho.</p></details>
+            <details><summary>“Dá para trabalhar em outro emprego junto?”</summary><p>A rotina foi desenhada para estudo + estágio. O primeiro semestre já ocupa 10h–16h e, depois, entra o estágio. Um segundo emprego tende a ser difícil de conciliar.</p></details>
+            <details><summary>“É EAD?”</summary><p>Não. O curso de ADS é presencial na unidade da Haddock Lobo.</p></details>
+            <details><summary>“Precisa de notebook?”</summary><p>Sim. A instituição exige computador próprio e pode especificar uma configuração mínima.</p></details>
+          </div>
+        </div>
+
+        <div>
+          <div class="card">
+            <span class="kicker">Resumo para decidir</span>
+            <strong>O que você está comprando, afinal?</strong>
+            <p style="margin-top:10px">Não é só uma grade de ADS. É um pacote mais fechado: <b>curso presencial + estágio organizado + rotina já estruturada para entrar em TI durante a graduação</b>.</p>
+          </div>
+          <div class="card" style="margin-top:12px">
+            <span class="kicker">Principal vantagem</span>
+            <strong>Experiência antes do diploma</strong>
+            <p>Você não precisa esperar se formar para tentar a primeira vaga na área.</p>
+          </div>
+          <div class="card" style="margin-top:12px">
+            <span class="kicker">Principal trade-off</span>
+            <strong>Menos flexibilidade</strong>
+            <p>Horários, estágio e empresa ficam mais amarrados ao programa do que em uma faculdade convencional.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap source-box">
+        <b>Fontes principais:</b> Manual do Candidato SPTech 2027/1, edital do processo seletivo 2027/1, FAQ, páginas do curso de ADS e do Programa Profissional do Futuro. 
+        <a href="https://sptech.school/analise-e-desenvolvimento-de-sistemas/" target="_blank" rel="noopener">Ver página oficial do curso ↗</a>
+        <br><br>
+        * Valores usados nesta página são referências publicadas pela SPTech para o período citado e podem mudar. Esta página é um resumo independente para facilitar entendimento.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">Feito para explicar a jornada de ADS da SPTech de forma simples, especialmente para quem está comparando faculdade, estágio e custo familiar.</div>
+  </footer>
+
+  <script>
+    const data = {
+      1:{tuition:0, stipend:0, note:"No 1º semestre não há estágio e a mensalidade é zero."},
+      2:{tuition:1808, stipend:2000, note:"Ponto médio ilustrativo da faixa publicada de R$ 1.800–2.200."},
+      3:{tuition:1808, stipend:2000, note:"Ponto médio ilustrativo da faixa publicada de R$ 1.800–2.200."},
+      4:{tuition:1808, stipend:2250, note:"Ponto médio ilustrativo da faixa publicada de R$ 2.000–2.500."},
+      5:{tuition:1808, stipend:2250, note:"Pode haver estágio ou efetivação; o valor aqui mantém a faixa de estágio só para comparação."}
+    };
+    const brl = n => n.toLocaleString("pt-BR",{style:"currency",currency:"BRL",maximumFractionDigits:0});
+    document.querySelectorAll(".segmented button").forEach(btn=>{
+      btn.addEventListener("click",()=>{
+        document.querySelectorAll(".segmented button").forEach(b=>b.classList.remove("active"));
+        btn.classList.add("active");
+        const d = data[btn.dataset.sem];
+        document.getElementById("tuition").textContent = brl(d.tuition);
+        document.getElementById("stipend").textContent = brl(d.stipend);
+        const diff = d.stipend-d.tuition;
+        document.getElementById("balance").textContent = (diff>0?"+":"") + brl(diff);
+        document.getElementById("calcNote").textContent = d.note;
+      });
+    });
+  </script>
+</body>
+</html>
